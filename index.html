@@ -1,0 +1,2306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Safiya Nursyahadah - Data Engineering Student</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --hero-bg: #1a1a2e;
+            --about-bg: #2a1f2d;
+            --projects-bg: #1f1929;
+            --experience-bg: #2d1f24;
+            --contact-bg: #1a1010;
+            --accent: #e8a0b0;
+            --lilac: #9d8ec7;
+            --mauve: #c07a8a;
+            --text-light: #f5f1f7;
+            --text-white: #ffffff;
+            --card-border: rgba(232, 160, 176, 0.3);
+            --card-border-lilac: rgba(157, 142, 199, 0.3);
+        }
+
+        :root.dark-mode {
+            --hero-bg: #0f0f1a;
+            --about-bg: #1a141d;
+            --projects-bg: #13101a;
+            --experience-bg: #1f1419;
+            --contact-bg: #0d0a0d;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--hero-bg);
+            color: var(--text-light);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* NAVBAR */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 3rem;
+            background: transparent;
+            transition: all 0.3s ease;
+        }
+
+        nav.scrolled {
+            background: rgba(26, 26, 46, 0.85);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--accent);
+            letter-spacing: 1px;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2.5rem;
+            align-items: center;
+        }
+
+        .nav-menu a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 500;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        .nav-menu a:hover,
+        .nav-menu a.active {
+            color: var(--accent);
+        }
+
+        .nav-menu a.active::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: var(--accent);
+        }
+
+        .nav-right {
+            display: flex;
+            gap: 1.5rem;
+            align-items: center;
+        }
+
+        .icon-btn {
+            background: none;
+            border: none;
+            color: var(--text-light);
+            font-size: 1.3rem;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .icon-btn:hover {
+            color: var(--accent);
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 5px;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background: var(--text-light);
+            border-radius: 2px;
+            transition: all 0.3s ease;
+        }
+
+        /* HERO SECTION */
+        .hero {
+            min-height: 100vh;
+            background: linear-gradient(135deg, var(--hero-bg) 0%, rgba(232, 160, 176, 0.05) 100%);
+            display: flex;
+            align-items: center;
+            padding: 6rem 3rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(232, 160, 176, 0.1) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .hero-content {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
+            position: relative;
+            z-index: 1;
+            text-align: center;
+        }
+
+        .hero-text h3 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.1rem;
+            color: var(--lilac);
+            font-weight: 300;
+            margin-bottom: 0.5rem;
+            letter-spacing: 1px;
+        }
+
+        .hero-text h1 {
+            position: relative;
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            font-weight: 900;
+            color: var(--text-white);
+            margin-bottom: 1rem;
+            line-height: 1.1;
+        }
+
+        .hero-text .star {
+            color: var(--accent);
+            font-size: 1.3rem;
+            margin: 0 0.3rem;
+        }
+
+        .hero-text p {
+            font-size: 1.1rem;
+            color: var(--text-light);
+            margin-bottom: 2rem;
+            font-weight: 300;
+            line-height: 1.8;
+        }
+
+        /* Decorative floating stars around hero text */
+        .hero-text h1::before,
+        .hero-text h1::after {
+            content: '✦';
+            color: rgba(232,160,176,0.18);
+            font-size: 1.2rem;
+            position: absolute;
+            transform: translateY(-30%);
+            opacity: 0.9;
+        }
+
+        .hero-text h1::before {
+            left: 48%;
+            transform: translate(-220%, -10%) rotate(-10deg);
+        }
+
+        .hero-text h1::after {
+            right: 48%;
+            transform: translate(220%, -40%) rotate(25deg);
+        }
+
+        .cta-btn {
+            display: inline-block;
+            padding: 0.9rem 2.5rem;
+            background: var(--accent);
+            color: var(--hero-bg);
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            border: 2px solid var(--accent);
+            cursor: pointer;
+        }
+
+        .cta-btn:hover {
+            background: transparent;
+            color: var(--accent);
+            transform: translateY(-2px);
+        }
+
+        .hero-image {
+            width: 280px;
+            height: 280px;
+            border-radius: 20px;
+            overflow: hidden;
+            border: 3px solid #e8a0b0;
+            flex-shrink: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .hero-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center top;
+        }
+
+        .image-placeholder {
+            width: 280px;
+            height: 280px;
+            border-radius: 20px;
+            background: linear-gradient(135deg, rgba(157, 142, 199, 0.2) 0%, rgba(232, 160, 176, 0.2) 100%);
+            border: 3px solid #e8a0b0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 4rem;
+            font-weight: 700;
+            color: var(--accent);
+            font-family: 'Playfair Display', serif;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .image-placeholder::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 30% 30%, rgba(232, 160, 176, 0.1) 0%, transparent 50%);
+        }
+
+        /* SECTION STYLES */
+        section {
+            padding: 5rem 3rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 3rem;
+            color: var(--text-white);
+            position: relative;
+        }
+
+        .section-title .star {
+            color: var(--accent);
+            margin: 0 0.5rem;
+        }
+
+        /* ABOUT SECTION */
+        #about {
+            background-color: var(--about-bg);
+        }
+
+        .about-wrapper {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 360px 1fr;
+            gap: 2.5rem;
+            align-items: center;
+            padding: 2.5rem;
+            position: relative;
+        }
+
+        .id-card {
+            width: 360px;
+            background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.06));
+            border-radius: 18px;
+            padding: 1.2rem 1.4rem 1.8rem 1.4rem;
+            border: 1px solid var(--card-border);
+            box-shadow: 0 12px 40px rgba(157,142,199,0.06), 0 4px 12px rgba(232,160,176,0.04);
+            transform: rotate(-3deg);
+            transition: transform 0.35s ease, box-shadow 0.25s ease;
+            position: relative;
+            overflow: visible;
+        }
+
+        .id-card:hover {
+            transform: rotate(0deg) translateY(-8px);
+            box-shadow: 0 28px 60px rgba(157,142,199,0.12), 0 10px 28px rgba(232,160,176,0.06);
+        }
+
+        .id-card::before {
+            content: '';
+            position: absolute;
+            top: -22px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 36px;
+            height: 26px;
+            background: linear-gradient(180deg, rgba(157,142,199,0.18), rgba(232,160,176,0.12));
+            border-radius: 6px 6px 4px 4px;
+            box-shadow: inset 0 -3px 6px rgba(0,0,0,0.12);
+        }
+
+        .id-card .lanyard {
+            position: absolute;
+            top: -66px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 6px;
+            height: 48px;
+            background: linear-gradient(180deg, rgba(157,142,199,0.25), rgba(232,160,176,0.25));
+            border-radius: 4px;
+            filter: blur(0.2px);
+        }
+
+        .id-card .utm-small {
+            text-align: center;
+            font-size: 0.75rem;
+            letter-spacing: 1px;
+            color: var(--text-light);
+            margin-bottom: 0.6rem;
+            opacity: 0.9;
+        }
+
+        /* decorative flourish behind id-card */
+        .id-card::after {
+            content: '';
+            position: absolute;
+            right: -40px;
+            top: -40px;
+            width: 120px;
+            height: 120px;
+            background: radial-gradient(circle at 30% 30%, rgba(157,142,199,0.06), transparent 40%);
+            border-radius: 50%;
+            pointer-events: none;
+            transform: rotate(-12deg);
+            z-index: 0;
+        }
+
+        .utm-logo {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 48px;
+            height: 28px;
+            background: var(--lilac);
+            color: #fff;
+            border-radius: 6px;
+            font-weight: 700;
+            margin: 0 auto 0.8rem auto;
+            font-size: 0.95rem;
+        }
+
+        .id-photo {
+            width: 240px;
+            height: 240px;
+            margin: 0 auto 0.9rem auto;
+            border-radius: 50%;
+            overflow: visible;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .photo-frame {
+            width: 100%;
+            height: 100%;
+            display: block;
+        }
+
+        .photo-frame image,
+        .photo-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+            display: block;
+        }
+
+        .photo-frame .scallop {
+            fill: none;
+            stroke: rgba(157,142,199,0.92);
+            stroke-width: 6;
+            stroke-linecap: round;
+            stroke-dasharray: 8 6;
+        }
+
+        .photo-frame .ring {
+            fill: none;
+            stroke: rgba(232,160,176,0.18);
+            stroke-width: 4;
+        }
+
+        .photo-sticker {
+            position: absolute;
+            z-index: 10;
+            filter: drop-shadow(2px 4px 6px rgba(0, 0, 0, 0.3));
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            pointer-events: auto;
+        }
+
+        .sticker-myeong { width: 55px; top: -20px; left: 50%; transform: translateX(-50%) rotate(-5deg); }
+        .sticker-anggut { width: 52px; top: 25px; right: -25px; transform: rotate(15deg); }
+        .sticker-acun { width: 50px; bottom: 25px; right: -20px; transform: rotate(-10deg); }
+        .sticker-onyang { width: 55px; bottom: -22px; left: 30%; transform: rotate(8deg); }
+        .sticker-nyaring { width: 48px; top: 80px; left: -28px; transform: rotate(-20deg); }
+
+        .sticker-myeong:hover { transform: translateX(-50%) scale(1.2) rotate(0deg); }
+        .sticker-anggut:hover { transform: scale(1.2) rotate(25deg); }
+        .sticker-acun:hover { transform: scale(1.2) rotate(-20deg); }
+        .sticker-onyang:hover { transform: scale(1.2) rotate(0deg); }
+        .sticker-nyaring:hover { transform: scale(1.2) rotate(-10deg); }
+
+        .id-name {
+            text-align: center;
+            font-weight: 800;
+            color: var(--accent);
+            margin-top: 0.4rem;
+            font-size: 0.95rem;
+        }
+
+        .id-role {
+            text-align: center;
+            font-size: 0.85rem;
+            color: var(--text-light);
+            opacity: 0.9;
+            margin-top: 0.2rem;
+        }
+
+        .id-small {
+            text-align: center;
+            font-size: 0.75rem;
+            color: rgba(245,241,247,0.6);
+            margin-top: 0.8rem;
+        }
+
+        .id-caption {
+            text-align: center;
+            font-size: 0.65rem;
+            color: rgba(245,241,247,0.45);
+            margin-top: 0.6rem;
+        }
+
+        .bio-card {
+            background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.04));
+            border-radius: 14px;
+            padding: 2rem;
+            border: 1px solid var(--card-border-lilac);
+            box-shadow: 0 14px 40px rgba(0,0,0,0.28);
+            position: relative;
+            z-index: 1;
+        }
+
+        .bio-card .hello {
+            color: var(--accent);
+            font-size: 0.95rem;
+            margin-bottom: 0.6rem;
+            font-weight: 600;
+        }
+
+        .bio-card h3 {
+            font-size: 1.8rem;
+            margin: 0 0 0.6rem 0;
+            color: var(--text-white);
+            font-weight: 800;
+        }
+
+        .bio-card p {
+            color: var(--text-light);
+            opacity: 0.95;
+            margin-bottom: 0.9rem;
+            line-height: 1.6;
+        }
+
+        .view-skills {
+            display: inline-block;
+            padding: 0.6rem 1.2rem;
+            border-radius: 999px;
+            border: 2px solid var(--accent);
+            color: var(--accent);
+            background: transparent;
+            text-decoration: none;
+            font-weight: 600;
+            margin-top: 0.6rem;
+        }
+
+        .bio-stats {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .bio-stat {
+            background: rgba(157,142,199,0.08);
+            padding: 0.5rem 0.9rem;
+            border-radius: 10px;
+            color: var(--text-light);
+            font-weight: 600;
+            font-size: 0.9rem;
+            border: 1px solid rgba(157,142,199,0.12);
+        }
+
+        @media (max-width: 860px) {
+            .about-wrapper {
+                grid-template-columns: 1fr;
+                padding: 1rem;
+                gap: 1.5rem;
+            }
+
+            .id-card {
+                width: 320px;
+                margin: 0 auto;
+                transform: none;
+            }
+
+            .id-photo {
+                width: 200px;
+                height: 200px;
+            }
+        }
+
+        /* CERTIFICATIONS SECTION */
+        #certifications {
+            background-color: #18121a;
+            padding-top: 2.5rem;
+            padding-bottom: 3rem;
+        }
+
+        .cert-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.2rem;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .cert-card {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+            padding: 1rem;
+            border-radius: 10px;
+            background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(0,0,0,0.06));
+            border: 1px solid rgba(255,255,255,0.02);
+            transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+            position: relative;
+            overflow: visible;
+        }
+
+        .cert-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 18px 40px rgba(232,160,176,0.08), 0 6px 18px rgba(157,142,199,0.06);
+            border-color: rgba(232,160,176,0.24);
+        }
+
+        .cert-badge {
+            width: 64px;
+            height: 64px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-weight: 800;
+            font-size: 1.1rem;
+            flex-shrink: 0;
+        }
+
+        .cert-info {
+            flex: 1;
+        }
+
+        .cert-info .cert-title {
+            color: var(--text-white);
+            font-weight: 700;
+            font-size: 14px;
+            margin-bottom: 4px;
+        }
+
+        .cert-info .cert-issuer {
+            color: var(--accent);
+            font-size: 13px;
+            margin-bottom: 6px;
+            font-weight: 600;
+        }
+
+        .cert-meta {
+            color: rgba(245,241,247,0.64);
+            font-size: 12px;
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 6px;
+        }
+
+        .view-badge {
+            display: inline-block;
+            padding: 0.4rem 0.8rem;
+            border-radius: 999px;
+            background: var(--accent);
+            color: var(--hero-bg);
+            font-weight: 700;
+            font-size: 12px;
+            text-decoration: none;
+            border: 2px solid var(--accent);
+        }
+
+
+
+        /* issuer brand colors */
+        .badge-alteryx { background: linear-gradient(135deg,#1e90ff,#2b9cff); }
+        .badge-aws { background: linear-gradient(135deg,#ff9900,#ff7a00); }
+        .badge-microsoft { background: linear-gradient(135deg,#9d8ec7,#4ea1f3); }
+
+        @media (max-width: 980px) {
+            .cert-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        @media (max-width: 560px) {
+            .cert-grid { grid-template-columns: 1fr; }
+        }
+
+        .about-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .about-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--card-border);
+            padding: 2.5rem;
+            border-radius: 15px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .about-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--accent);
+            background: rgba(232, 160, 176, 0.05);
+        }
+
+        .about-card-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .about-card h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--text-white);
+        }
+
+        .about-card p {
+            color: var(--text-light);
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+
+        /* SKILLS SECTION */
+        #skills {
+            background-color: var(--projects-bg);
+        }
+
+        .skills-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 2rem;
+        }
+
+        .skill-badge {
+            padding: 0.6rem 1.3rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1.5px solid var(--card-border-lilac);
+            color: var(--text-light);
+            border-radius: 25px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            cursor: default;
+        }
+
+        .skill-badge:hover {
+            background: rgba(157, 142, 199, 0.2);
+            border-color: var(--lilac);
+            color: var(--accent);
+            transform: translateY(-3px);
+        }
+
+        /* SEMESTERS SECTION */
+        #semesters {
+            background-color: var(--about-bg);
+        }
+
+        .semesters-container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .semester-item {
+            margin-bottom: 1.5rem;
+            border: 1px solid var(--card-border);
+            border-radius: 14px;
+            overflow: hidden;
+            background: rgba(255, 255, 255, 0.03);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+        }
+
+        .semester-item.highlight {
+            border-color: rgba(232, 160, 176, 0.6);
+            box-shadow: 0 0 30px rgba(232, 160, 176, 0.16);
+        }
+
+        .semester-header {
+            padding: 1.5rem 1.8rem;
+            background: rgba(232, 160, 176, 0.08);
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            user-select: none;
+            transition: all 0.3s ease;
+            gap: 1rem;
+        }
+
+        .semester-header:hover {
+            background: rgba(232, 160, 176, 0.16);
+        }
+
+        .semester-summary {
+            display: flex;
+            flex-direction: column;
+            gap: 0.35rem;
+        }
+
+        .semester-summary h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2rem;
+            color: var(--text-white);
+            margin: 0;
+        }
+
+        .semester-summary .year {
+            color: var(--lilac);
+            font-size: 0.95rem;
+            font-weight: 400;
+        }
+
+        .semester-count {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.35rem 0.8rem;
+            border-radius: 999px;
+            background: rgba(157, 142, 199, 0.18);
+            color: var(--accent);
+            font-size: 0.85rem;
+            font-weight: 600;
+            border: 1px solid rgba(157, 142, 199, 0.35);
+        }
+
+        .semester-meta {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+            justify-content: flex-end;
+        }
+
+        .semester-toggle {
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            transition: transform 0.3s ease;
+            color: var(--accent);
+            border-radius: 50%;
+            border: 1px solid rgba(232, 160, 176, 0.3);
+            background: rgba(232, 160, 176, 0.05);
+        }
+
+        .semester-header.active .semester-toggle {
+            transform: rotate(180deg);
+        }
+
+        .semester-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.35s ease, padding 0.35s ease;
+            padding: 0 1.8rem;
+        }
+
+        .semester-content.active {
+            max-height: 1200px;
+            padding: 1.5rem 1.8rem 2rem;
+        }
+
+        .courses-list {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 1rem;
+        }
+
+        .course-card {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(232, 160, 176, 0.18);
+            border-radius: 14px;
+            padding: 1.2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.9rem;
+            min-height: 170px;
+        }
+
+        .course-code {
+            color: var(--accent);
+            font-size: 0.9rem;
+            font-weight: 700;
+            letter-spacing: 0.05em;
+        }
+
+        .course-name {
+            color: var(--text-white);
+            font-size: 1rem;
+            line-height: 1.5;
+            margin: 0;
+            font-weight: 500;
+        }
+
+        .repo-btn {
+            margin-top: auto;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: fit-content;
+            padding: 0.55rem 1rem;
+            border-radius: 999px;
+            background: var(--accent);
+            color: var(--hero-bg);
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 700;
+            transition: all 0.3s ease;
+        }
+
+        .repo-btn:hover {
+            background: transparent;
+            color: var(--accent);
+            border: 1px solid var(--accent);
+        }
+
+        @media (max-width: 768px) {
+            .courses-list {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .course-code {
+            color: var(--lilac);
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .course-name {
+            color: var(--text-white);
+            font-size: 0.95rem;
+            margin: 0.3rem 0;
+            font-weight: 500;
+        }
+
+        .course-tags {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .course-tag {
+            background: var(--accent);
+            color: var(--hero-bg);
+            padding: 0.2rem 0.6rem;
+            border-radius: 12px;
+            font-size: 0.7rem;
+            font-weight: 600;
+        }
+
+        /* FEATURED PROJECTS SECTION */
+        #featured-projects {
+            background-color: rgba(157, 142, 199, 0.06);
+        }
+
+        #featured-projects .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 0.5rem;
+            color: var(--text-white);
+        }
+
+        .projects-subtitle {
+            text-align: center;
+            color: var(--text-light);
+            font-size: 1.05rem;
+            margin-bottom: 3rem;
+            font-weight: 300;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .project-card {
+            background: rgba(26, 26, 46, 0.85);
+            border: 2px solid rgba(232, 160, 176, 0.2);
+            border-radius: 16px;
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(232, 160, 176, 0.05) 0%, transparent 100%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+        }
+
+        .project-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 20px 50px rgba(232, 160, 176, 0.2), inset 0 0 40px rgba(232, 160, 176, 0.08);
+            border-color: rgba(232, 160, 176, 0.4);
+        }
+
+        .project-card:hover::before {
+            opacity: 1;
+        }
+
+        .project-header {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .project-icon-box {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, rgba(232, 160, 176, 0.25), rgba(157, 142, 199, 0.25));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            flex-shrink: 0;
+        }
+
+        .project-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--text-white);
+            margin: 0;
+        }
+
+        .project-description {
+            color: var(--text-light);
+            font-size: 0.95rem;
+            line-height: 1.7;
+            position: relative;
+            z-index: 1;
+        }
+
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+            margin-top: 1rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .project-tag {
+            padding: 0.35rem 0.9rem;
+            border-radius: 999px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            background: rgba(232, 160, 176, 0.15);
+            color: var(--accent);
+            border: 1px solid rgba(232, 160, 176, 0.3);
+        }
+
+        .project-tag:nth-child(odd) {
+            background: rgba(157, 142, 199, 0.15);
+            color: var(--lilac);
+            border-color: rgba(157, 142, 199, 0.3);
+        }
+
+        @media (max-width: 1024px) {
+            .projects-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+        }
+
+        @media (max-width: 768px) {
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* EXTRACURRICULAR SECTION */
+        #extracurricular {
+            background-color: var(--experience-bg);
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: rgba(245,241,247,0.75);
+            font-size: 1rem;
+            margin-top: 0.5rem;
+            margin-bottom: 2.5rem;
+            font-weight: 300;
+        }
+
+        .featured-activity {
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid var(--card-border);
+            border-radius: 18px;
+            padding: 2.5rem;
+            margin-bottom: 3rem;
+            display: grid;
+            grid-template-columns: auto 1fr;
+            gap: 2rem;
+            align-items: start;
+        }
+
+        .featured-activity-icon {
+            font-size: 3.5rem;
+            color: var(--accent);
+        }
+
+        .featured-activity h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            color: var(--text-white);
+            margin-bottom: 0.5rem;
+        }
+
+        .featured-activity .activity-role {
+            color: var(--accent);
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .featured-activity p {
+            color: var(--text-light);
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
+
+        .featured-activity-footer {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .featured-activity-year {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.55rem 0.9rem;
+            border-radius: 999px;
+            background: rgba(232, 160, 176, 0.15);
+            color: var(--accent);
+            font-weight: 700;
+            font-size: 0.9rem;
+        }
+
+        .activity-btn,
+        .featured-activity .activity-btn {
+            padding: 0.85rem 1.4rem;
+            border-radius: 999px;
+            border: 1px solid var(--accent);
+            background: var(--accent);
+            color: var(--hero-bg);
+            text-decoration: none;
+            font-weight: 700;
+            transition: all 0.3s ease;
+        }
+
+        .activity-btn:hover,
+        .featured-activity .activity-btn:hover {
+            background: transparent;
+            color: var(--accent);
+        }
+
+        .activities-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .activity-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--card-border);
+            border-radius: 15px;
+            padding: 1.8rem;
+            text-align: left;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            min-height: 320px;
+        }
+
+        .activity-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--accent);
+            background: rgba(232, 160, 176, 0.1);
+            box-shadow: 0 20px 40px rgba(232,160,176,0.08);
+        }
+
+        .activity-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            width: 56px;
+            height: 56px;
+            display: grid;
+            place-items: center;
+            background: linear-gradient(135deg, rgba(232, 160, 176, 0.16), rgba(157, 142, 199, 0.16));
+            border-radius: 16px;
+        }
+
+        .activity-card h4 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2rem;
+            color: var(--text-white);
+            margin-bottom: 0.5rem;
+        }
+
+        .activity-role {
+            color: var(--accent);
+            font-weight: 600;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .activity-card p {
+            color: var(--text-light);
+            font-size: 0.95rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.7;
+            flex-grow: 1;
+        }
+
+        .activity-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-top: auto;
+        }
+
+        .activity-year {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.45rem 0.8rem;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.08);
+            color: var(--text-light);
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        /* CONTACT SECTION */
+        #contact {
+            background-color: var(--contact-bg);
+        }
+
+        .contact-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: start;
+        }
+
+        .contact-info h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: var(--text-white);
+        }
+
+        .contact-info h2 .star {
+            color: var(--accent);
+        }
+
+        .contact-tagline {
+            color: var(--text-light);
+            font-size: 1rem;
+            margin-bottom: 2rem;
+            line-height: 1.8;
+        }
+
+        .contact-detail {
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-detail-label {
+            color: var(--lilac);
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 0.3rem;
+        }
+
+        .contact-detail-value {
+            color: var(--text-white);
+            font-size: 1.05rem;
+        }
+
+        .contact-detail-value a {
+            color: var(--accent);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .contact-detail-value a:hover {
+            text-decoration: underline;
+        }
+
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group label {
+            color: var(--lilac);
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 0.5rem;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1.5px solid var(--card-border-lilac);
+            border-radius: 8px;
+            padding: 0.8rem 1rem;
+            color: var(--text-white);
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input::placeholder,
+        .form-group textarea::placeholder {
+            color: rgba(255, 255, 255, 0.4);
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--accent);
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .form-btn {
+            padding: 0.9rem 2rem;
+            background: var(--accent);
+            color: var(--contact-bg);
+            border: none;
+            border-radius: 50px;
+            font-weight: 600;
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .form-btn:hover {
+            background: transparent;
+            color: var(--accent);
+            border: 2px solid var(--accent);
+        }
+
+        /* FOOTER */
+        footer {
+            background-color: #0d0a0d;
+            padding: 2rem 3rem;
+            text-align: center;
+            border-top: 1px solid var(--card-border);
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2rem;
+            color: var(--text-white);
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-degree {
+            color: var(--lilac);
+            font-size: 0.9rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-socials {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-socials a {
+            color: var(--text-light);
+            font-size: 1.3rem;
+            transition: color 0.3s ease;
+            text-decoration: none;
+        }
+
+        .footer-socials a:hover {
+            color: var(--accent);
+        }
+
+        .footer-copyright {
+            color: var(--text-light);
+            font-size: 0.85rem;
+            opacity: 0.7;
+        }
+
+        /* SCROLL REVEAL ANIMATION */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            nav {
+                padding: 1.2rem 1.5rem;
+            }
+
+            .logo {
+                font-size: 1.4rem;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            .nav-menu {
+                position: fixed;
+                top: 70px;
+                left: 0;
+                width: 100%;
+                background: rgba(26, 26, 46, 0.95);
+                backdrop-filter: blur(10px);
+                flex-direction: column;
+                gap: 0;
+                max-height: 0;
+                overflow: hidden;
+                transition: max-height 0.3s ease;
+            }
+
+            .nav-menu.active {
+                max-height: 500px;
+            }
+
+            .nav-menu a {
+                padding: 1rem 2rem;
+                display: block;
+                border-bottom: 1px solid var(--card-border);
+            }
+
+            .nav-menu a.active::after {
+                display: none;
+            }
+
+            .hero {
+                padding: 8rem 1.5rem 3rem;
+            }
+
+            .hero-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+                text-align: center;
+            }
+
+            .hero-text h1 {
+                font-size: 2.2rem;
+            }
+
+            .hero-text h3,
+            .hero-text p {
+                font-size: 1rem;
+            }
+
+            .hero-image {
+                width: 200px;
+                height: 200px;
+            }
+
+            section {
+                padding: 3rem 1.5rem;
+            }
+
+            .section-title {
+                font-size: 1.8rem;
+            }
+
+            .about-cards {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .featured-activity {
+                grid-template-columns: 1fr;
+            }
+
+            .featured-activity-icon {
+                text-align: center;
+            }
+
+            .hero::before {
+                width: 300px;
+                height: 300px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo {
+                font-size: 1.2rem;
+            }
+
+            .nav-menu {
+                top: 60px;
+            }
+
+            nav {
+                padding: 1rem 1rem;
+            }
+
+            .hero {
+                min-height: 80vh;
+            }
+
+            .hero-text h1 {
+                font-size: 1.8rem;
+            }
+
+            .hero-text h3 {
+                font-size: 0.9rem;
+            }
+
+            .hero-image {
+                width: 150px;
+                height: 150px;
+            }
+
+            .section-title {
+                font-size: 1.5rem;
+            }
+
+            .skill-badge {
+                font-size: 0.85rem;
+                padding: 0.5rem 1rem;
+            }
+
+            .talks-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- NAVBAR -->
+    <nav>
+        <div class="logo">Safiya ✦</div>
+        <ul class="nav-menu">
+            <li><a href="#hero" class="active">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#semesters">Semesters</a></li>
+            <li><a href="#featured-projects">Featured Projects</a></li>
+            <li><a href="#extracurricular">Extracurricular</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+        <div class="nav-right">
+            <a href="https://github.com/sfiyamsnr" target="_blank" class="icon-btn" title="GitHub">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v 3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                </svg>
+            </a>
+            <a href="https://www.linkedin.com/in/safiyanursyahadah" target="_blank" class="icon-btn" title="LinkedIn">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.475-2.236-1.986-2.236-1.081 0-1.722.722-2.004 1.418-.103.249-.129.597-.129.946v5.441h-3.554s.05-8.814 0-9.752h3.554v1.375c.427-.659 1.191-1.598 2.897-1.598 2.117 0 3.704 1.384 3.704 4.362v5.613zM5.337 8.855c-1.144 0-1.915-.762-1.915-1.715 0-.955.77-1.715 1.918-1.715 1.146 0 1.916.76 1.916 1.715 0 .953-.77 1.715-1.919 1.715zm1.6 11.597H3.738V9.555h3.199v10.897zM22.224 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.224 0z"/>
+                </svg>
+            </a>
+            <button class="icon-btn" id="darkModeToggle" title="Toggle Dark Mode">
+                <span id="darkModeIcon">🌙</span>
+            </button>
+        </div>
+        <div class="hamburger" id="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <section id="hero" class="hero">
+        <div class="hero-content">
+            <div class="hero-text">
+                <h3>Hi there, I'm</h3>
+                <h1>Safiya <span class="star">✦</span> Nursyahadah</h1>
+                <p>Bachelor of Computer Science (Data Engineering)</p>
+                <p>Universiti Teknologi Malaysia (UTM)</p>
+                <a href="#about" class="cta-btn">Discover My Journey</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ABOUT SECTION -->
+    <section id="about">
+        <h2 class="section-title">About Me</h2>
+        <div class="about-wrapper">
+            <div class="id-card reveal">
+                <div class="lanyard"></div>
+                <div class="utm-small">UNIVERSITI TEKNOLOGI MALAYSIA</div><br>
+                <div class="id-photo">
+                <img src="images/myeong.png" alt="" class="photo-sticker sticker-myeong">
+                <img src="images/anggut.png" alt="" class="photo-sticker sticker-anggut">
+                <img src="images/acun.png" alt="" class="photo-sticker sticker-acun">
+                <img src="images/onyang.png" alt="" class="photo-sticker sticker-onyang">
+                <img src="images/nyaring.png" alt="" class="photo-sticker sticker-nyaring">
+
+                <svg class="photo-frame" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <clipPath id="profileClip">
+                            <circle cx="100" cy="100" r="88" />
+                        </clipPath>
+                    </defs>
+                    <circle cx="100" cy="100" r="88" fill="rgba(157,142,199,0.15)" />
+                    <image href="images/safiya.jpeg" x="12" y="12" width="176" height="176" clip-path="url(#profileClip)" preserveAspectRatio="xMidYMid slice" />
+                    <circle class="ring" cx="100" cy="100" r="91" />
+                    <circle class="scallop" cx="100" cy="100" r="95" />
+                </svg>
+                <br>
+            </div>
+            <br>
+                <div class="id-name">SAFIYA NURSYAHADAH</div>
+                <div class="id-role">Computer Science · Data Engineering</div>
+                <div class="id-small">est 2023</div>
+            </div>
+
+            <div class="bio-card reveal">
+                <div class="hello">Hi there!</div>
+                <h3>I'm Safiya Nursyahadah</h3>
+                <p>I am a Computer Science (Data Engineering) student at Universiti Teknologi Malaysia. I am passionate about data pipelines, cloud engineering, and building systems that create real impact.</p>
+                <p>Alongside my technical journey, I am actively involved in volunteering and community service programs, where I develop leadership, communication, and teamwork skills while contributing to initiatives that benefit local communities and students.</p>
+                <p>I am constantly growing — from data engineering and cloud platforms like Azure and Databricks, to low-code solutions with Power Apps and mobile development with Flutter.</p>
+                <a href="#skills" class="view-skills">View Skills</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- SKILLS SECTION -->
+    <section id="skills">
+        <h2 class="section-title">Skills & Tools</h2>
+        <div class="skills-container reveal">
+            <div class="skill-badge">Python</div>
+            <div class="skill-badge">PySpark</div>
+            <div class="skill-badge">SQL</div>
+            <div class="skill-badge">Azure</div>
+            <div class="skill-badge">Databricks</div>
+            <div class="skill-badge">Power BI</div>
+            <div class="skill-badge">Power Apps</div>
+            <div class="skill-badge">Docker</div>
+            <div class="skill-badge">PostgreSQL</div>
+            <div class="skill-badge">SAP BTP</div>
+            <div class="skill-badge">Flutter</div>
+            <div class="skill-badge">Firebase</div>
+            <div class="skill-badge">HTML/CSS</div>
+            <div class="skill-badge">C++</div>
+            <div class="skill-badge">Java</div>
+            <div class="skill-badge">Git</div>
+            <div class="skill-badge">Jupyter</div>
+        </div>
+    </section>
+    </section>
+
+    <!-- CERTIFICATIONS SECTION -->
+    <section id="certifications">
+        <h2 class="section-title">Certifications <span class="star">✦</span></h2>
+        <p style="text-align:center;color:rgba(245,241,247,0.75);margin-top:-8px;margin-bottom:18px;">Verified credentials and professional achievements</p>
+        <div class="cert-grid">
+            <div class="cert-card reveal">
+                <div class="cert-badge badge-alteryx">A</div>
+                <div class="cert-info">
+                    <div class="cert-title">Alteryx Designer Core Certification</div>
+                    <div class="cert-issuer">Alteryx</div>
+                    <div class="cert-meta"><span>Issued: May 2026</span><span>Expires: May 2028</span></div>
+                    <a class="view-badge" href="https://www.credly.com/badges/aeb4e3c7-3db9-4f99-951c-d6451de3e385/linked_in_profile" target="_blank" rel="noopener">View Badge</a>
+                </div>
+            </div>
+
+            <div class="cert-card reveal">
+                <div class="cert-badge badge-aws">AWS</div>
+                <div class="cert-info">
+                    <div class="cert-title">AWS Academy Graduate - Cloud Data Pipeline Builder</div>
+                    <div class="cert-issuer">Amazon Web Services (AWS)</div>
+                    <div class="cert-meta"><span>Issued: April 2026</span><span>No expiry</span></div>
+                    <a class="view-badge" href="https://www.credly.com/badges/7a82f751-06b1-4ad3-b06c-e7fa34bf8d17/linked_in_profile" target="_blank" rel="noopener">View Badge</a>
+                </div>
+            </div>
+
+            <div class="cert-card reveal">
+                <div class="cert-badge badge-aws">AWS</div>
+                <div class="cert-info">
+                    <div class="cert-title">AWS Academy Graduate - Cloud Developing</div>
+                    <div class="cert-issuer">Amazon Web Services (AWS)</div>
+                    <div class="cert-meta"><span>Issued: April 2026</span><span>No expiry</span></div>
+                    <a class="view-badge" href="https://www.credly.com/badges/931557d3-e724-46a1-9827-15fccc024453/linked_in_profile" target="_blank" rel="noopener">View Badge</a>
+                </div>
+            </div>
+
+            <div class="cert-card reveal">
+                <div class="cert-badge badge-aws">AWS</div>
+                <div class="cert-info">
+                    <div class="cert-title">AWS Academy Graduate - Cloud Foundations</div>
+                    <div class="cert-issuer">Amazon Web Services (AWS)</div>
+                    <div class="cert-meta"><span>Issued: April 2026</span><span>No expiry</span></div>
+                    <a class="view-badge" href="https://www.credly.com/badges/28e8ea6f-6dff400f-970f-92c8ca7c881c/linked_in_profile" target="_blank" rel="noopener">View Badge</a>
+                </div>
+            </div>
+
+            <div class="cert-card reveal">
+                <div class="cert-badge badge-microsoft">M</div>
+                <div class="cert-info">
+                    <div class="cert-title">Microsoft Certified: Azure Data Fundamentals</div>
+                    <div class="cert-issuer">Microsoft</div>
+                    <div class="cert-meta"><span>Issued: February 2026</span><span>No expiry</span></div>
+                    <a class="view-badge" href="https://www.credly.com/badges/d9fe5115-94ed-4909-b5a3-e23fab2f49ce/linked_in_profile" target="_blank" rel="noopener">View Badge</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SEMESTERS SECTION -->
+    <section id="semesters">
+        <h2 class="section-title">Academic Journey</h2>
+        <div class="semesters-container">
+            <div class="semester-item">
+                <div class="semester-header" onclick="toggleSemester(this)">
+                    <div class="semester-summary">
+                        <h3>Semester 1 <span class="year">2023/2024 Sem I</span></h3>
+                    </div>
+                    <div class="semester-meta">
+                        <span class="semester-count">4 courses</span>
+                        <div class="semester-toggle">▼</div>
+                    </div>
+                </div>
+                <div class="semester-content">
+                    <div class="courses-list">
+                        <div class="course-card reveal">
+                            <div class="course-code">SECR1013</div>
+                            <div class="course-name">Digital Logic</div>
+                            <a href="https://github.com/sfiyamsnr/SECR1013-DIGITAL-LOGIC" target="_blank" class="repo-btn">View Repo</a>
+                        </div>
+                        <div class="course-card reveal">
+                            <div class="course-code">SECP1513</div>
+                            <div class="course-name">Technology Information System</div>
+                            <a href="https://github.com/sfiyamsnr/SECP1513-TECHNOLOGY-INFORMATION-SYSTEM" target="_blank" class="repo-btn">View Repo</a>
+                        </div>
+                        <div class="course-card reveal">
+                            <div class="course-code">SECI1013</div>
+                            <div class="course-name">Discrete Structure</div>
+                            <a href="https://github.com/sfiyamsnr/SECI1013-DISCRETE-STRUCTURE" target="_blank" class="repo-btn">View Repo</a>
+                        </div>
+                        <div class="course-card reveal">
+                            <div class="course-code">SECJ1013</div>
+                            <div class="course-name">Programming Technique I</div>
+                            <a href="https://github.com/sfiyamsnr/SECJ1013-PROGRAMMING-TECHNIQUE-1" target="_blank" class="repo-btn">View Repo</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="semester-item">
+                <div class="semester-header" onclick="toggleSemester(this)">
+                    <div class="semester-summary">
+                        <h3>Semester 2 <span class="year">2023/2024 Sem II</span></h3>
+                    </div>
+                    <div class="semester-meta">
+                        <span class="semester-count">5 courses</span>
+                        <div class="semester-toggle">▼</div>
+                    </div>
+                </div>
+                <div class="semester-content">
+                    <div class="courses-list">
+                        <div class="course-card reveal">
+                            <div class="course-code">SECI1143</div>
+                            <div class="course-name">Probability & Statistical Data Analysis</div>
+                            <a href="https://github.com/sfiyamsnr/SECI1143---PROBABILITY-STATISTICAL-DATA-ANALYSIS" target="_blank" class="repo-btn">View Repo</a>
+                        </div>
+                        <div class="course-card reveal">
+                            <div class="course-code">SECJ1023</div>
+                            <div class="course-name">Programming Technique II</div>
+                            <a href="https://github.com/sfiyamsnr/SECJ1023-PROGRAMING-TECHNIQUE-II" target="_blank" class="repo-btn">View Repo</a>
+                        </div>
+                        <div class="course-card reveal">
+                            <div class="course-code">SECP2613</div>
+                            <div class="course-name">System Analysis and Design</div>
+                            <a href="https://github.com/sfiyamsnr/SECP2613-SYSTEM-ANALYSIS-AND-DESIGN" target="_blank" class="repo-btn">View Repo</a>
+                        </div>
+                        <div class="course-card reveal">
+                            <div class="course-code">SECR1033</div>
+                            <div class="course-name">Computer Organization and Architecture</div>
+                            <a href="https://github.com/sfiyamsnr/SECR1033-COMPUTER-ORGANIZATION-AND-ARCHITECTURE" target="_blank" class="repo-btn">View Repo</a>
+                        </div>
+                        <div class="course-card reveal">
+                            <div class="course-code">SECV2113</div>
+                            <div class="course-name">Human Computer Interaction</div>
+                            <a href="https://github.com/sfiyamsnr/SECV2113-HUMAN-COMPUTER-INTERACTION" target="_blank" class="repo-btn">View Repo</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="semester-item">
+                <div class="semester-header" onclick="toggleSemester(this)">
+                    <div class="semester-summary">
+                        <h3>Semester 3 <span class="year">2024/2025 Sem I</span></h3>
+                    </div>
+                    <div class="semester-meta">
+                        <span class="semester-count">5 courses</span>
+                        <div class="semester-toggle">▼</div>
+                    </div>
+                </div>
+                <div class="semester-content">
+                    <div class="courses-list">
+                        <div class="course-card reveal">
+                            <div class="course-code">SECJ2013</div>
+                            <div class="course-name">Data Structure and Algorithm</div>
+                            <a href="https://github.com/sfiyamsnr/SECJ2013-DATA-STRUCTURE-AND-ALGORITHM" target="_blank" class="repo-btn">View Repo</a>
+                        </div>
+                        <div class="course-card reveal">
+                            <div class="course-code">SECP2523</div>
+                            <div class="course-name">Database</div>
+                            <a href="https://github.com/sfiyamsnr/SECP2523-DATABASE" target="_blank" class="repo-btn">View Repo</a>
+                        </div>
+                        <div class="course-card reveal">
+                            <div class="course-code">SECP3204</div>
+                            <div class="course-name">Software Engineering</div>
+                            <a href="https://github.com/sfiyamsnr/SECP3204-SOFTWARE-ENGINEERING-" target="_blank" class="repo-btn">View Repo</a>
+                        </div>
+                        <div class="course-card reveal">
+                            <div class="course-code">SECP3723</div>
+                            <div class="course-name">System Development Technology</div>
+                            <a href="https://github.com/sfiyamsnr/SECP3723-SYSTEM-DEVELOPMENT-TECHNOLOGY" target="_blank" class="repo-btn">View Repo</a>
+                        </div>
+                        <div class="course-card reveal">
+                            <div class="course-code">SECR1213</div>
+                            <div class="course-name">Network Communications</div>
+                            <a href="https://github.com/sfiyamsnr/SECR1213-NETWORK-COMMUNICATIONS" target="_blank" class="repo-btn">View Repo</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="semester-item">
+                <div class="semester-header" onclick="toggleSemester(this)">
+                    <div class="semester-summary">
+                        <h3>Semester 4 <span class="year">2024/2025 Sem II</span></h3>
+                    </div>
+                    <div class="semester-meta">
+                        <span class="semester-count">5 courses</span>
+                        <div class="semester-toggle">▼</div>
+                    </div>
+                </div>
+                <div class="semester-content">
+                    <div class="courses-list">
+                        <div class="course-card reveal">
+                            <div class="course-code">SECD3761</div>
+                            <div class="course-name">Technopreneurship Seminar</div>
+                            <a href="https://github.com/sfiyamsnr/SECD3761-TECHNOPRENEURSHIP-SEMINAR" target="_blank" class="repo-btn">View Repo</a>
+                        </div>
+                        <div class="course-card reveal">
+                            <div class="course-code">SECJ2154</div>
+                            <div class="course-name">Object Oriented Programming</div>
+                            <a href="https://github.com/sfiyamsnr/SECJ2154-OBJECT-ORIENTED-PROGRAMMING" target="_blank" class="repo-btn">View Repo</a>
+                        </div>
+                        <div class="course-card reveal">
+                            <div class="course-code">SECP3223</div>
+                            <div class="course-name">Data Analytics Programming</div>
+                            <a href="https://github.com/sfiyamsnr/SECP3223-DATA-ANALYTICS-PROGRAMMING" target="_blank" class="repo-btn">View Repo</a>
+                        </div>
+                        <div class="course-card reveal">
+                            <div class="course-code">SECR2043</div>
+                            <div class="course-name">Operating Systems</div>
+                            <a href="https://github.com/sfiyamsnr/SECR2043-OPERATING-SYSTEMS" target="_blank" class="repo-btn">View Repo</a>
+                        </div>
+                        <div class="course-card reveal">
+                            <div class="course-code">SECP2753</div>
+                            <div class="course-name">Data Mining</div>
+                            <a href="https://github.com/sfiyamsnr/SECP2753-DATA-MINING" target="_blank" class="repo-btn">View Repo</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="semester-item">
+                <div class="semester-header" onclick="toggleSemester(this)">
+                    <div class="semester-summary">
+                        <h3>Semester 5 <span class="year">2025/2026 Sem I</span></h3>
+                    </div>
+                    <div class="semester-meta">
+                        <span class="semester-count">3 courses</span>
+                        <div class="semester-toggle">▼</div>
+                    </div>
+                </div>
+                <div class="semester-content">
+                    <div class="courses-list">
+                        <div class="course-card reveal">
+                            <div class="course-code">SECJ3553</div>
+                            <div class="course-name">Artificial Intelligence</div>
+                            <a href="https://github.com/sfiyamsnr/SECJ3553-ARTIFICIAL-INTELLIGENCE" target="_blank" class="repo-btn">View Repo</a>
+                        </div>
+                        <div class="course-card reveal">
+                            <div class="course-code">SECP3623</div>
+                            <div class="course-name">Database Programming</div>
+                            <a href="https://github.com/sfiyamsnr/SECP3623-DATABASE-PROGRAMMING" target="_blank" class="repo-btn">View Repo</a>
+                        </div>
+                        <div class="course-card reveal">
+                            <div class="course-code">SECP3744</div>
+                            <div class="course-name">Enterprise Systems Design and Modeling</div>
+                            <a href="https://github.com/sfiyamsnr/SECP3744-ENTERPRISE-SYSTEMS-DESIGN-AND-MODELING" target="_blank" class="repo-btn">View Repo</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="semester-item highlight">
+                <div class="semester-header active" onclick="toggleSemester(this)">
+                    <div class="semester-summary">
+                        <h3>Semester 6 <span class="year">2025/2026 Sem II</span></h3>
+                    </div>
+                    <div class="semester-meta">
+                        <span class="semester-count">4 courses</span>
+                        <div class="semester-toggle">▼</div>
+                    </div>
+                </div>
+                <div class="semester-content active">
+                    <div class="courses-list">
+                        <div class="course-card reveal">
+                            <div class="course-code">SECP3106</div>
+                            <div class="course-name">Application Development</div>
+                            <a href="https://github.com/sfiyamsnr/SECP3106-APPLICATION-DEVELOPMENT-" target="_blank" class="repo-btn">View Repo</a>
+                        </div>
+                        <div class="course-card reveal">
+                            <div class="course-code">SECP3133</div>
+                            <div class="course-name">High Performance Data Processing</div>
+                            <a href="https://github.com/sfiyamsnr/SECP3133-HIGH-PERFORMANCE-DATA-PROCESSING" target="_blank" class="repo-btn">View Repo</a>
+                        </div>
+                        <div class="course-card reveal">
+                            <div class="course-code">SECP3213</div>
+                            <div class="course-name">Business Intelligence</div>
+                            <a href="https://github.com/sfiyamsnr/SECP3213-BUSINESS-INTELLIGENCE" target="_blank" class="repo-btn">View Repo</a>
+                        </div>
+                        <div class="course-card reveal">
+                            <div class="course-code">SECP3843</div>
+                            <div class="course-name">Special Topic in Data Engineering</div>
+                            <a href="https://github.com/sfiyamsnr/SECP3843-SPECIAL-TOPIC-IN-DATA-ENGINEERING" target="_blank" class="repo-btn">View Repo</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FEATURED PROJECTS SECTION -->
+    <section id="featured-projects">
+        <h2 class="section-title">Featured Projects <span class="star">✦</span></h2>
+        <p class="projects-subtitle">A showcase of my data engineering work</p>
+        <div class="projects-grid">
+            <div class="project-card reveal">
+                <div class="project-header">
+                    <div class="project-icon-box">🔥</div>
+                    <h3 class="project-title">ETL Pipeline in Apache Spark</h3>
+                </div>
+                <p class="project-description">Developed a PySpark ETL pipeline processing millions of records with data quality validation and Parquet storage. Deployed PostgreSQL via Docker and built analytical dashboards for reporting.</p>
+                <div class="project-tags">
+                    <span class="project-tag">PySpark</span>
+                    <span class="project-tag">PostgreSQL</span>
+                    <span class="project-tag">Docker</span>
+                    <span class="project-tag">Parquet</span>
+                </div>
+            </div>
+
+            <div class="project-card reveal">
+                <div class="project-header">
+                    <div class="project-icon-box">🕸️</div>
+                    <h3 class="project-title">Large-Scale Web Crawler Data Processing</h3>
+                </div>
+                <p class="project-description">Scraped 100,000+ web listings and built an automated data cleaning and quality assurance pipeline. Benchmarked multiple processing libraries to optimize performance and throughput.</p>
+                <div class="project-tags">
+                    <span class="project-tag">Python</span>
+                    <span class="project-tag">Web Scraping</span>
+                    <span class="project-tag">Pandas</span>
+                    <span class="project-tag">Benchmarking</span>
+                </div>
+            </div>
+
+            <div class="project-card reveal">
+                <div class="project-header">
+                    <div class="project-icon-box">☁️</div>
+                    <h3 class="project-title">Azure End-to-End Data Engineering Project</h3>
+                </div>
+                <p class="project-description">Built an automated data pipeline from on-premises SQL Server to Azure using Medallion Architecture (Bronze, Silver, Gold). Modeled data into star schema and developed interactive Power BI dashboard for business reporting.</p>
+                <div class="project-tags">
+                    <span class="project-tag">Azure</span>
+                    <span class="project-tag">Medallion Architecture</span>
+                    <span class="project-tag">Power BI</span>
+                    <span class="project-tag">Star Schema</span>
+                </div>
+            </div>
+
+            <div class="project-card reveal">
+                <div class="project-header">
+                    <div class="project-icon-box">📊</div>
+                    <h3 class="project-title">Vehicle Emissions & Fuel Efficiency Analysis</h3>
+                </div>
+                <p class="project-description">Cleaned and analyzed vehicle emissions dataset using Python and Pandas. Built visualizations using Matplotlib and Seaborn to present key findings.</p>
+                <div class="project-tags">
+                    <span class="project-tag">Python</span>
+                    <span class="project-tag">Pandas</span>
+                    <span class="project-tag">Matplotlib</span>
+                    <span class="project-tag">Seaborn</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+  <!-- EXTRACURRICULAR SECTION -->
+<section id="extracurricular">
+    <h2 class="section-title">Extracurricular <span class="star">✦</span></h2>
+    <p class="section-subtitle">Beyond the classroom — my journey of growth and service</p>
+    
+    <div class="activities-grid">
+        <!-- 1. May 2026 -->
+        <div class="activity-card reveal">
+            <div class="activity-icon">🌿</div>
+            <h4>Eco Guardian Initiative Programme (eGIP) 2026</h4>
+            <span class="activity-role">Volunteer Representative</span>
+            <p>Represented UTM as a volunteer in the Eco Guardian Initiative Programme, a Malaysia Book of Records environmental awareness campaign.</p>
+            <div class="activity-footer">
+                <span class="activity-year">May 2026</span>
+                <a href="https://www.linkedin.com/posts/safiyanursyahadah_egip2026-ecoguardian-malaysiabookofrecords-activity-7461638140655476736-VrPn" target="_blank" rel="noopener" class="activity-btn">View Post</a>
+            </div>
+        </div>
+
+        <!-- 3. April 2026 -->
+        <div class="activity-card reveal">
+            <div class="activity-icon">🎉</div>
+            <h4>JARVIS x FIESTRA '26</h4>
+            <span class="activity-role">Volunteer</span>
+            <p>Attended JARVIS x FIESTRA 2026, assisted secondary school students from SMK Sri Skudai in assembling, programming, and troubleshooting their Arduino robot cars.</p>
+            <div class="activity-footer">
+                <span class="activity-year">April 2026</span>
+                <a href="https://www.linkedin.com/posts/safiyanursyahadah_jarvis-x-fiestra-26-24-april-2026-had-activity-7474770433494523904-AylH" target="_blank" rel="noopener" class="activity-btn">View Post</a>
+            </div>
+        </div>
+
+        <!-- 4. December 2025 -->
+        <div class="activity-card reveal">
+            <div class="activity-icon">🌊</div>
+            <h4>Fast Water Rescue & Flood Risk Management</h4>
+            <span class="activity-role">Volunteer</span>
+            <p>Participated in a fast water rescue and flood risk management certification programme, gaining practical emergency response skills.</p>
+            <div class="activity-footer">
+                <span class="activity-year">December 2025</span>
+                <a href="https://www.linkedin.com/posts/safiyanursyahadah_grateful-for-the-opportunity-to-participate-activity-7455632437360979970-2Nnz" target="_blank" rel="noopener" class="activity-btn">View Post</a>
+            </div>
+        </div>
+
+        <!-- 5. November 2025 -->
+        <div class="activity-card reveal">
+            <div class="activity-icon">📋</div>
+            <h4>Registration Unit - UNBOCS 2026</h4>
+            <span class="activity-role">Registration Unit Member</span>
+            <p>Managing participant check-in and check-out, ensuring an organised and efficient registration process throughout the event.</p>
+            <div class="activity-footer">
+                <span class="activity-year">November 2025</span>
+                <a href="https://www.linkedin.com/posts/safiyanursyahadah_i-am-honoured-to-have-served-as-part-of-the-activity-7395137220556488704-f5dj" target="_blank" rel="noopener" class="activity-btn">View Post</a>
+            </div>
+        </div>
+
+        <!-- 6. August 2025 -->
+        <div class="activity-card reveal">
+            <div class="activity-icon">📋</div>
+            <h4>Global Outreach Program (GOP) RANAH</h4>
+            <span class="activity-role">Treasurer</span>
+            <p>Served as Treasurer for the Global Outreach Program (GOP) RANAH, managing finances and supporting international community engagement activities.</p>
+            <div class="activity-footer">
+                <span class="activity-year">August 2025</span>
+                <a href="https://www.linkedin.com/posts/safiyanursyahadah_globaloutreachprogram-ranah-academicnetworking-activity-7473434408595673088-WymI" target="_blank" rel="noopener" class="activity-btn">View Post</a>
+            </div>
+        </div>
+
+        <!-- 7. May 2025 -->
+        <div class="activity-card reveal">
+            <div class="activity-icon">🏘️</div>
+            <h4>Dari Hati ke Desa — Volunteer@UTM</h4>
+            <span class="activity-role">Community Volunteer</span>
+            <p>Throughout the program, we distributed Bakul Rahmah to families in need, lived with host families, participated in gotong-royong activities, assisted with solar light installation projects, and joined various cultural and community engagement activities alongside the residents.</p>
+            <div class="activity-footer">
+                <span class="activity-year">May 2025</span>
+                <a href="https://www.linkedin.com/posts/safiyanursyahadah_darihatikedesa-jelajahkomunitiutm-volunteerutm-activity-7473433759510315008-F4pO" target="_blank" rel="noopener" class="activity-btn">View Post</a>
+            </div>
+        </div>
+
+        <!-- 8. December 2024 -->
+        <div class="activity-card reveal">
+            <div class="activity-icon">📚</div>
+            <h4>Service Learning — Community Engagement</h4>
+            <span class="activity-role">Volunteer</span>
+            <p>As part of the Academic Service Learning course, our team organized a community engagement program with the residents of Pusat Jagaan Warga Emas Nur Ehsan, Johor.</p>
+            <div class="activity-footer">
+                <span class="activity-year">December 2024</span>
+                <a href="https://www.linkedin.com/posts/safiyanursyahadah_experientiallearning-servicelearning-communityengagement-activity-7473436381109710848-Xjf9" target="_blank" rel="noopener" class="activity-btn">View Post</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-name">Safiya Nursyahadah binti Masnoor</div>
+            <div class="footer-degree">Bachelor of Computer Science (Data Engineering) with Honours • Universiti Teknologi Malaysia</div>
+            <div class="footer-socials">
+                <a href="https://github.com/sfiyamsnr" target="_blank" title="GitHub">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v 3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                    </svg>
+                </a>
+                <a href="https://www.linkedin.com/in/safiyanursyahadah" target="_blank" title="LinkedIn">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.475-2.236-1.986-2.236-1.081 0-1.722.722-2.004 1.418-.103.249-.129.597-.129.946v5.441h-3.554s.05-8.814 0-9.752h3.554v1.375c.427-.659 1.191-1.598 2.897-1.598 2.117 0 3.704 1.384 3.704 4.362v5.613zM5.337 8.855c-1.144 0-1.915-.762-1.915-1.715 0-.955.77-1.715 1.918-1.715 1.146 0 1.916.76 1.916 1.715 0 .953-.77 1.715-1.919 1.715zm1.6 11.597H3.738V9.555h3.199v10.897zM22.224 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.224 0z"/>
+                    </svg>
+                </a>
+                <a href="mailto:safiyamasnoor@gmail.com" title="Email">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                        <polyline points="22,6 12,13 2,6"></polyline>
+                    </svg>
+                </a>
+            </div>
+            <div class="footer-copyright">Made with ♡ by Safiya · 2026</div>
+        </div>
+    </footer>
+
+    <script>
+        // NAVBAR SCROLL EFFECT & ACTIVE LINK
+        const nav = document.querySelector('nav');
+        const navLinks = document.querySelectorAll('.nav-menu a');
+        const hamburger = document.getElementById('hamburger');
+        const navMenu = document.querySelector('.nav-menu');
+
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
+            updateActiveLink();
+        });
+
+        function updateActiveLink() {
+            const scrollPosition = window.scrollY + 100;
+            
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                const sectionId = link.getAttribute('href').substring(1);
+                const section = document.getElementById(sectionId);
+                
+                if (section) {
+                    const sectionTop = section.offsetTop;
+                    const sectionBottom = sectionTop + section.offsetHeight;
+                    
+                    if (scrollPosition >= sectionTop && scrollPosition < sectionBottom) {
+                        link.classList.add('active');
+                    }
+                }
+            });
+        }
+
+        // HAMBURGER MENU
+        hamburger.addEventListener('click', () => {
+            hamburger.style.gap = navMenu.classList.contains('active') ? '5px' : '3px';
+            navMenu.classList.toggle('active');
+        });
+
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('active');
+                hamburger.style.gap = '5px';
+            });
+        });
+
+        // DARK MODE TOGGLE
+        const darkModeToggle = document.getElementById('darkModeToggle');
+        const darkModeIcon = document.getElementById('darkModeIcon');
+        const htmlElement = document.documentElement;
+
+        // Check for saved preference
+        if (localStorage.getItem('darkMode') === 'true') {
+            htmlElement.classList.add('dark-mode');
+            darkModeIcon.textContent = '☀️';
+        }
+
+        darkModeToggle.addEventListener('click', () => {
+            htmlElement.classList.toggle('dark-mode');
+            const isDarkMode = htmlElement.classList.contains('dark-mode');
+            localStorage.setItem('darkMode', isDarkMode);
+            darkModeIcon.textContent = isDarkMode ? '☀️' : '🌙';
+        });
+
+        // SCROLL REVEAL ANIMATION
+        const reveals = document.querySelectorAll('.reveal');
+
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                    revealObserver.unobserve(entry.target);
+                }
+            });
+        }, {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        });
+
+        reveals.forEach(reveal => {
+            revealObserver.observe(reveal);
+        });
+
+
+
+        // SEMESTER ACCORDION
+        function toggleSemester(header) {
+            const content = header.nextElementSibling;
+            const isCurrentlyActive = content.classList.contains('active');
+            
+            const allHeaders = document.querySelectorAll('.semester-header');
+            const allContents = document.querySelectorAll('.semester-content');
+            
+            allHeaders.forEach((item) => item.classList.remove('active'));
+            allContents.forEach((item) => item.classList.remove('active'));
+            
+            // Toggle: if it was open, close it; if it was closed, open it
+            if (!isCurrentlyActive) {
+                header.classList.add('active');
+                content.classList.add('active');
+            }
+        }
+
+        // CONTACT FORM
+        const contactForm = document.querySelector('.contact-form');
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const message = document.getElementById('message').value;
+            
+            const mailtoLink = `mailto:safiyamasnoor@gmail.com?subject=Message from ${encodeURIComponent(name)}&body=${encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`)}`;
+            
+            window.location.href = mailtoLink;
+        });
+
+        // INITIALIZE
+        updateActiveLink();
+        document.querySelectorAll('.semester-header.active').forEach(header => {
+            const content = header.nextElementSibling;
+            if (content) content.classList.add('active');
+        });
+    </script>
+</body>
+</html>
